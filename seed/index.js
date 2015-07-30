@@ -2,11 +2,13 @@ var models = require('../models');
 
 var faker = require('faker');
 
+var numberOf = faker.random.number({min:10, max: 30});
+
 models.sequelize
   .sync({force:true})
   .then(function(){
+    // adding products
     var products = [];
-    var numberOf = faker.random.number({min:10, max: 30});
     for(var i = 0; i < numberOf; i++){
       console.log(faker.commerce.price(0, 1000, 2));
       products.push({
@@ -15,5 +17,16 @@ models.sequelize
         price: Number(faker.commerce.price(0, 1000, 2))
       });
     }
-    return models.Product.bulkCreate(products);
+    return models.Product.bulkCreate(products, {returning: true});
+  })
+  .then(function(products){
+    //adding inventory stock for products
+    var stock = [];
+    for(var i = 0; i < products.length; i++){
+      stock.push({
+        quantity: faker.random.number({min:0, max:100}),
+        product_id: products[i].id
+      });
+    }
+    return models.Inventory.bulkCreate(stock);
   });
