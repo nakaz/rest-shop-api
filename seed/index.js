@@ -29,4 +29,7 @@ models.sequelize
       });
     }
     return models.Inventory.bulkCreate(stock);
+  })
+  .then(function(){
+
   });
