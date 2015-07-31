@@ -11,6 +11,14 @@ server.use(restify.acceptParser(server.acceptable));
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
 
+server.use(
+  function crossOrigin(req,res,next){
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    return next();
+  }
+);
+
 server.get('/products', function (req, res){
   models.Product
     .findAll()
@@ -30,7 +38,11 @@ server.get('/products/:id', function (req, res){
 
 server.get('/orders', function (req, res){
   models.Order
-    .findAll()
+    .findAll({
+      include: [{
+        model: models.Product
+      }]
+    })
     .then(function (orders){
       return res.json(orders);
     });
