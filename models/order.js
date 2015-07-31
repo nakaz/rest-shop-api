@@ -4,9 +4,10 @@ module.exports = function(sequelize, DataTypes) {
     name: DataTypes.TEXT,
     quantity: DataTypes.INTEGER
   }, {
+    underscored: true,
     classMethods: {
       associate: function(models) {
-        // associations can be defined here
+        models.Order.belongsTo(models.Product);
       }
     }
   });

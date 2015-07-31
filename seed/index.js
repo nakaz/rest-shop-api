@@ -2,7 +2,7 @@ var models = require('../models');
 
 var faker = require('faker');
 
-var numberOf = faker.random.number({min:10, max: 30});
+var numberOf = faker.random.number({min:10, max:30});
 
 models.sequelize
   .sync({force:true})
@@ -28,8 +28,16 @@ models.sequelize
         product_id: products[i].id
       });
     }
-    return models.Inventory.bulkCreate(stock);
-  })
-  .then(function(){
-
+    return models.Inventory.bulkCreate(stock)
+    .then(function(){
+      var orders = [];
+      for(var i = 0; i < numberOf; i++){
+        orders.push({
+          name: faker.name.firstName() + ' ' + faker.name.lastName(),
+          product_id: products[i].id,
+          quantity: faker.random.number({min:1, max:25})
+        });
+      }
+      return models.Order.bulkCreate(orders);
+    });
   });
