@@ -57,7 +57,6 @@ server.get('/orders/:id', function (req, res){
       }]
     })
     .then(function (order){
-      console.log(order);
       return res.json(order);
     });
 });
@@ -69,8 +68,17 @@ server.post('/orders', function (req, res){
       quantity: req.body.quantity,
       product_id: req.body.product_id
     })
-    .then(function (order){
-      return res.json(order);
+    .then(function (newOrder){
+      var id = newOrder.id;
+      models.Order
+        .findById(id,{
+          include: [{
+            model: models.Product
+          }]
+        })
+        .then(function(order){
+          return res.json(order);
+        });
     });
 });
 
