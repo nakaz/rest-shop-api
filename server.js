@@ -30,7 +30,7 @@ server.get('/products', function (req, res){
 server.get('/products/:id', function (req, res){
   var id = req.params.id;
   models.Product
-    .findOne({where: {'id': id}})
+    .findById(id)
     .then(function(product){
       return res.json(product);
     });
@@ -51,8 +51,13 @@ server.get('/orders', function (req, res){
 server.get('/orders/:id', function (req, res){
   var id = req.params.id;
   models.Order
-    .findOne({where: {'id': id}})
+    .findById(id,{
+      include: [{
+        model: models.Product
+      }]
+    })
     .then(function (order){
+      console.log(order);
       return res.json(order);
     });
 });
