@@ -2,6 +2,19 @@
 
 Mock store API that serves raw data to user connecting via Rest-Shop-App
 
+Server will:
+
+1. Give JSON data to user based on routes.
+1. Check Inventories' stock quantity with `POST /orders` quantity submit is acceptable.
+  1. Return 'no stock' message if there isn't enough to support new order post.
+  1. Subtract Inventories' stock quantity based on quantity submission.
+1. Queries associated products with orders and inventory.
+
+Things to do (Aug 1, 2015):
+
+1. Validate name and quantity input for correct datatypes.
+1. Clean up front-end code.
+
 ## Tables Outputed
 
 ### Product
