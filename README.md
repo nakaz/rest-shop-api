@@ -54,4 +54,5 @@ Route: `none`
 ##Things to do (Aug 1, 2015):
 
 1. Validate name and quantity input for correct datatypes.
+1. Fix "user-error" incorrect submissions in new orders forms.
 1. Clean up front-end code.
