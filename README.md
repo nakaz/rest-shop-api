@@ -10,10 +10,6 @@ Mock store API that serves raw data to user connecting via Rest-Shop-App
   1. Subtract Inventories' stock quantity based on quantity submission.
 1. Queries associated products with orders and inventory.
 
-##Things to do (Aug 1, 2015):
-
-1. Validate name and quantity input for correct datatypes.
-1. Clean up front-end code.
 
 ## Tables Outputed
 
@@ -54,3 +50,8 @@ Route: `none`
 | created_at      | timestamp               |
 | updated_at      | timestamp               |
 | product_id (FK) | INTEGER                 |
+
+##Things to do (Aug 1, 2015):
+
+1. Validate name and quantity input for correct datatypes.
+1. Clean up front-end code.
