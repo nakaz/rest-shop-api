@@ -24,7 +24,7 @@ models.sequelize
     var stock = [];
     for(var i = 0; i < products.length; i++){
       stock.push({
-        quantity: faker.random.number({min:0, max:100}),
+        quantity: faker.random.number({min:0, max:50}),
         product_id: products[i].id
       });
     }
